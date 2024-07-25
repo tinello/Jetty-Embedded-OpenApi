@@ -1,0 +1,19 @@
+{
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "gradle.debug": true,
+  "cSpell.words": [
+    "assertj",
+    "Hikari",
+    "jdbc",
+    "Servlet",
+    "tinello",
+    "tomcatembed"
+  ],
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-20",
+      "path": "/home/g/DEV/Tools/jdk-20.0.2+9"
+    }
+  ],
+  "java.jdt.ls.java.home": "/home/g/DEV/Tools/jdk-20.0.2+9"
+}
