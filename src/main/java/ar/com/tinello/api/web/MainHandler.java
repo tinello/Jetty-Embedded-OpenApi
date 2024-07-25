@@ -15,25 +15,23 @@ import org.openapi4j.core.validation.ValidationException;
 import org.openapi4j.operation.validator.validation.OperationValidator;
 import org.openapi4j.operation.validator.validation.RequestValidator;
 
-import ar.com.tinello.api.core.Provider;
 
-public class MainHandler extends Handler.Abstract {
+public final class MainHandler extends Handler.Abstract {
 
     private final RequestValidator requestValidator;
-    private final Provider provider;
     private final Map<String, Operation> operations;
 
-    public MainHandler(RequestValidator requestValidator, Provider provider, Map<String, Operation> operations) {
+    public MainHandler(final RequestValidator requestValidator, final Map<String, Operation> operations) {
         this.requestValidator = requestValidator;
-        this.provider = provider;
         this.operations = operations;
     }
 
     @Override
-    public boolean handle(Request request, Response response, Callback callback) throws Exception {
+    public final boolean handle(final Request request, final Response response, final Callback callback) throws Exception {
 
         response.getHeaders().put(HttpHeader.CONTENT_TYPE, "application/json; charset=utf-8");
         
+        // Convert from jetty request to openapi request
         final var req = ServletRequest.of(request);
 
         OperationValidator operationValidator;
@@ -51,13 +49,14 @@ public class MainHandler extends Handler.Abstract {
         
         String body;
         try {
-            body = op.execute(request, provider);
+            body = op.execute(request);
             response.setStatus(HttpServletResponse.SC_OK);
         } catch (Exception e) {
             e.printStackTrace();
             body = "{\"message\":\"" + e.getMessage().replaceAll("\"", "").replaceAll("\r", "").replaceAll("\n", "") + "\"}";
         }
 
+        response.write(true, BufferUtil.toBuffer(body, StandardCharsets.UTF_8), callback);
         return true;
     }
     

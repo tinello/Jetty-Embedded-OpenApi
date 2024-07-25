@@ -27,9 +27,15 @@ public abstract class ServletRequest implements Request {
    * @return The wrapped request to work this.
    */
   public static Request of(final org.eclipse.jetty.server.Request hsr) {
-    final var a = hsr.read();
-    final var b = a.getByteBuffer();
-    final var c = b.array();
+    byte[] c = new byte[]{};
+    try {
+      final var a = hsr.read();
+      final var b = a.getByteBuffer();
+      c = b.array();
+      
+    } catch (Exception e) {
+      // TODO: handle exception
+    }
     return of(hsr, new ByteArrayInputStream(c));
   }
 

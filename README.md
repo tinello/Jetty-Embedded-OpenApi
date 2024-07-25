@@ -1,2 +1,49 @@
 # Jetty-Embedded-OpenApi
 API Rest with Eclipse Jetty, Open Api Validate. 
+
+
+## Requirements <a name="Requirements"></a>
+### Software: <a name="Software"></a>
+- OpenJDK 20 with OpenJ9 -> https://developer.ibm.com/languages/java/semeru-runtimes/downloads/
+- Docker 4.28.0 -> https://docs.docker.com/desktop/install/ubuntu/
+
+### Configure JDK VSCode: <a name="ConfigureJDKvscode"></a>
+
+Change /.vscode/launch.json for your Java Home
+
+### Configure JDK Gradle: <a name="ConfigureJDKgradle"></a>
+
+Change gradle.properties for your Java Home
+
+### Environment variables: <a name="EnvironmentVariables"></a>
+- DB_URL=localhost:5432/postgres
+- DB_USER=postgres
+- DB_PASS=mysecretpassword
+
+### Start PostgreSQL <a name="StartPostgreSQL"></a>
+```bash
+docker run --name jetty-openapi-postgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres:16.3-alpine3.18
+```
+
+
+### Start application <a name="StartApplication"></a>
+```bash
+DB_URL="localhost:5432/postgres" DB_USER=postgres DB_PASS=mysecretpassword ./gradlew run
+```
+
+## Development <a name="development"></a>
+### Visual Studio Code Extensions: <a name="vscode-extensions"></a>
+#### Extension Pack for Java
+
+Install "Extension Pack for Java" from Microsoft: https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack
+
+#### Gradle Extension Pack
+
+Install "Gradle Extension Pack" from Richard Willis https://marketplace.visualstudio.com/items?itemName=richardwillis.vscode-gradle-extension-pack
+
+
+## Endpoints
+
+| Name                 | Endpoint                                                             |
+| -------------------- | -------------------------------------------------------------------- |
+| Service Info         | http://localhost:8080/                                               |

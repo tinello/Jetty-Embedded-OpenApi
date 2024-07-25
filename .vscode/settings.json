@@ -6,8 +6,7 @@
     "Hikari",
     "jdbc",
     "Servlet",
-    "tinello",
-    "tomcatembed"
+    "tinello"
   ],
   "java.configuration.runtimes": [
     {

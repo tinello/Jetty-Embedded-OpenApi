@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   version: 0.0.1
   title: api
-  description: API with Tomcat embedded, OpenAPI validate.
+  description: API with Jetty embedded, OpenAPI validate.
   contact:
     email: api@tinello.com.ar
 

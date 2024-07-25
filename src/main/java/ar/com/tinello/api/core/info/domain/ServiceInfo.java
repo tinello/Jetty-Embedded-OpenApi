@@ -1,6 +1,6 @@
 package ar.com.tinello.api.core.info.domain;
 
-public class ServiceInfo {
+public final class ServiceInfo {
   
   private final String apiName;
   private final String apiVersion;
@@ -12,13 +12,13 @@ public class ServiceInfo {
     this.apiHealthy = apiHealthy;
   }
 
-  public String getApiName() {
+  public final String getApiName() {
     return this.apiName;
   }
-  public String getApiVersion() {
+  public final String getApiVersion() {
     return this.apiVersion;
   }
-  public boolean getApiHealthy() {
+  public final boolean getApiHealthy() {
     return this.apiHealthy;
   }
 

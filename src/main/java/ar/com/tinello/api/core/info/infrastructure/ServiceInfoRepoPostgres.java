@@ -4,16 +4,16 @@ import ar.com.tinello.api.core.info.domain.ServiceInfo;
 import ar.com.tinello.api.core.info.domain.ServiceInfoRepo;
 import ar.com.tinello.api.core.infrastructure.sql.SqlClient;
 
-public class ServiceInfoRepoPostgres implements ServiceInfoRepo {
+public final class ServiceInfoRepoPostgres implements ServiceInfoRepo {
 
 private final SqlClient sqlClient;
 
-  public ServiceInfoRepoPostgres(SqlClient sqlClient) {
+  public ServiceInfoRepoPostgres(final SqlClient sqlClient) {
     this.sqlClient = sqlClient;
   }
 
   @Override
-  public ServiceInfo get() {
+  public final ServiceInfo get() {
     final var table = sqlClient.query("Select ?, ?, ?", "API", "0.0.1", true);
 
     final var row = table.get(0);

@@ -12,7 +12,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
-group 'ar.com.tinello.tomcatembed'
+group 'ar.com.tinello.jettyembed'
 version '1.0.0'
 
 java {
@@ -32,8 +32,6 @@ repositories {
 }
 
 dependencies {
-    //implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-core', version: '10.1.26'
-    //implementation group: 'org.apache.tomcat.embed', name: 'tomcat-embed-logging-juli', version: '8.5.2'
     implementation group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
 
     implementation group: 'org.eclipse.jetty', name: 'jetty-server', version: '12.0.11'

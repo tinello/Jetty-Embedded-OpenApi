@@ -15,17 +15,19 @@ import ar.com.tinello.api.core.Environment;
 import ar.com.tinello.api.core.Provider;
 import ar.com.tinello.api.web.operations.ServiceInfo;
 
-public class MainJetty {
+public final class MainJetty {
 
     private MainJetty(){}
 
     public static void start() {
+
+        // Create server
         final var jetty = new Server();
         final var connector = new ServerConnector(jetty);
         connector.setPort(8080);
         jetty.setConnectors(new Connector[] {connector});
 
-
+        // Create Open API Validator
         final var classLoader = MainJetty.class.getClassLoader();
         final var resource = classLoader.getResource("contract.yaml");
 
@@ -36,23 +38,30 @@ public class MainJetty {
         } catch (ResolutionException | ValidationException e) {
             throw new ServerException(e);
         }
+        final var requestValidator = new RequestValidator(api);
         
+        // Create Provider
+        final var provider = new Provider(new Environment());
+
+        // Create Operations
         final var operations = new HashMap<String, Operation>();
-        final var serviceInfo = new ServiceInfo();
+        final var serviceInfo = new ServiceInfo(provider);
         operations.put(serviceInfo.getId(), serviceInfo);
 
-        jetty.setHandler(new MainHandler(new RequestValidator(api), new Provider(new Environment()), operations));
+        // Create a main Handler
+        final var mainHandler = new MainHandler(requestValidator, operations);
+        jetty.setHandler(mainHandler);
 
         
         try {
             jetty.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
             jetty.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
+            Thread.currentThread().interrupt();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 }

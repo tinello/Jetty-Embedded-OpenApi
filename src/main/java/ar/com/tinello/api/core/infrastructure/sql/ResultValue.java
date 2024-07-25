@@ -1,6 +1,6 @@
 package ar.com.tinello.api.core.infrastructure.sql;
 
-public class ResultValue {
+public final class ResultValue {
   
   private final Object value;
 
@@ -8,15 +8,15 @@ public class ResultValue {
     this.value = value;
   }
 
-  public int getInt() {
+  public final int getInt() {
     return Integer.valueOf(value.toString());
   }
 
-  public String getString() {
+  public final String getString() {
     return value.toString();
   }
 
-  public boolean getBoolean() {
+  public final boolean getBoolean() {
     return Boolean.valueOf(value.toString());
   }
 

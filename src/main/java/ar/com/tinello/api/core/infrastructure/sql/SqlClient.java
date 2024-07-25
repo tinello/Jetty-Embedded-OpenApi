@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-public class SqlClient {
+public final class SqlClient {
   
   private final DataSource ds;
 
@@ -17,7 +17,7 @@ public class SqlClient {
     this.ds = ds;
   }
 
-  public List<List<ResultValue>> query(final String query, final Object... args) {
+  public final List<List<ResultValue>> query(final String query, final Object... args) {
     
     final var result = new ArrayList<List<ResultValue>>();
 

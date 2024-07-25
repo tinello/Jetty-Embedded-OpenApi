@@ -9,30 +9,33 @@ import ar.com.tinello.api.core.Provider;
 import ar.com.tinello.api.web.Operation;
 import ar.com.tinello.api.web.ServerException;
 
-public class ServiceInfo implements Operation {
+public final class ServiceInfo implements Operation {
+
+  private final Provider provider;
+
+  public ServiceInfo(final Provider provider) {
+    this.provider = provider;
+  }
 
   @Override
-  public String getId() {
+  public final String getId() {
     return "service_info";
   }
 
   @Override
-  public String execute(Request req, Provider provider) {
+  public final String execute(final Request req) {
 
-    ObjectMapper objectMapper = new ObjectMapper();
-
-    final var obj = objectMapper.createObjectNode();
-    
+    final var objectMapper = new ObjectMapper();
+    final var objectNode = objectMapper.createObjectNode();
     
     try {
-
       final var response = provider.getServiceInfo().execute();
 
-      obj.put("name", response.getApiName());
-      obj.put("version", response.getApiVersion());
-      obj.put("healthy", response.getApiHealthy());
+      objectNode.put("name", response.getApiName());
+      objectNode.put("version", response.getApiVersion());
+      objectNode.put("healthy", response.getApiHealthy());
 
-      return objectMapper.writeValueAsString(obj);
+      return objectMapper.writeValueAsString(objectNode);
     } catch (JsonProcessingException e) {
       throw new ServerException(e);
     }

@@ -3,7 +3,7 @@ package ar.com.tinello.api.core.info.actions;
 import ar.com.tinello.api.core.info.domain.ServiceInfo;
 import ar.com.tinello.api.core.info.domain.ServiceInfoRepo;
 
-public class GetServiceInfo {
+public final class GetServiceInfo {
   
   private final ServiceInfoRepo repo;
 
@@ -11,7 +11,7 @@ public class GetServiceInfo {
     this.repo = repo;
   }
 
-  public ServiceInfo execute() {
+  public final ServiceInfo execute() {
     return repo.get();
   }
 
