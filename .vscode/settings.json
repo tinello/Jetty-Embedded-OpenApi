@@ -10,9 +10,9 @@
   ],
   "java.configuration.runtimes": [
     {
-      "name": "JavaSE-20",
-      "path": "/home/g/DEV/Tools/jdk-20.0.2+9"
+      "name": "JavaSE-21",
+      "path": "/home/g/DEV/Tools/jdk-21.0.2+13"
     }
   ],
-  "java.jdt.ls.java.home": "/home/g/DEV/Tools/jdk-20.0.2+9"
+  "java.jdt.ls.java.home": "/home/g/DEV/Tools/jdk-21.0.2+13"
 }
